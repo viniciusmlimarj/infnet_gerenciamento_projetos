@@ -11,7 +11,7 @@
 			<c:if test="${not empty usuarioLogado}">
 				<c:if test="${usuarioLogado.perfil.administrador}">
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Usu·rio
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Usu√°rio
 						<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="/usuario">Listar</a></li>
@@ -44,9 +44,7 @@
 					<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="/tarefa">Listar</a></li>
-						<c:if test="${usuarioLogado.perfil.administrador or usuarioLogado.perfil.gerente}">
-							<li><a href="/tarefa/novo">Nova</a></li>
-						</c:if>
+						<li><a href="/tarefa/novo">Nova</a></li>
 					</ul>
 				</li>
 			</c:if>
