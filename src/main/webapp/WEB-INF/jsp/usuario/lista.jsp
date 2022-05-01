@@ -3,53 +3,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Usuários</title>
-	<c:import url="/WEB-INF/jsp/head.jsp"/>
+<meta charset="ISO-8859-1">
+<title>Pedidos</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/menu.jsp"/>
-	<c:import url="/WEB-INF/jsp/mensagens.jsp"/>
 	
 	<div class="container mt-3">
-	  <h2>Usuários</h2>
-	  
-	  <c:if test="${usuarioLogado.perfil.administrador}">
-		  <form action="/usuario/novo" method="get">
+	  <h2>Cadastramento de Usuários</h2>
+	  <c:if test="${usuarioLogado.admin}">
+		  <form action="/usuario" method="get">
 		    <button type="submit" class="btn btn-primary">Novo Usuário</button>
 		  </form>
 	  </c:if>
 
-	  <c:if test="${not empty lista}">
+	  <c:if test="${not empty listagem}">
+	 	  <p>Listagem de Usuários (${listagem.size()}):</p>            
 		  <table class="table table-striped">
 		    <thead>
 		      <tr>
+		        <th>ID</th>
 		        <th>Nome</th>
-		        <th>Perfil</th>
 		        <th>E-mail</th>
-		        <c:if test="${usuarioLogado.perfil.administrador}">
-		        	<th></th>
+		        <th>Solicitantes</th>
+		        <th>Produtos</th>
+		        <th>Pedidos</th>
+		        <c:if test="${usuarioLogado.admin}">
 		        	<th></th>
 		        </c:if>
+		        
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <c:forEach var="o" items="${lista}">	
+		      <c:forEach var="o" items="${listagem}">	
 			      <tr>
+			      	<td>${o.id}</td>
 			        <td>${o.nome}</td>
-			        <td>${o.perfil.nome}</td>
 			        <td>${o.email}</td>
-			        <c:if test="${usuarioLogado.perfil.administrador}">
-			        	<td><a href="/usuario/${o.id}">Alterar</a></td>
-			        	<td><a href="/usuario/${o.id}/excluir">Excluir</a></td>
+			        <td>${o.solicitantes.size()}</td>
+			        <td>${o.produtos.size()}</td>			        
+			        <td>${o.pedidos.size()}</td>
+			        <c:if test="${usuarioLogado.admin}">
+			        	<td><a href="/usuario/${o.id}/excluir">excluir</a></td>			        
 			        </c:if>
 			      </tr>
 		      </c:forEach>
 		    </tbody>
 		  </table>
 	  </c:if>
-		
- 	  <c:if test="${empty lista}">
+	  	
+ 	  <c:if test="${empty listagem}">
  	  	<p>Nenhum registro encontrado.</p>
  	  </c:if> 	              
 	</div>

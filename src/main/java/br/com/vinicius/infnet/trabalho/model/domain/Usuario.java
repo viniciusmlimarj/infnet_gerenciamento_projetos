@@ -8,28 +8,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "TUsuario")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String email;
 	private String senha;
-	@ManyToOne
-	private Perfil perfil;
-	@ManyToMany(mappedBy = "recursos")
-	private List<Projeto> projetos;
+	private boolean admin;
 	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JoinColumn(name = "idUsuario")
-	private List<Tarefa> tarefas;
+	private List<Solicitante> solicitantes;
+	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@JoinColumn(name = "idUsuario")
+	private List<Produto> produtos;
+	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@JoinColumn(name = "idUsuario")
+	private List<Pedido> pedidos;
 	
 	public Integer getId() {
 		return id;
@@ -55,10 +56,28 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Perfil getPerfil() {
-		return perfil;
+	public boolean isAdmin() {
+		return admin;
 	}
-	public void setPerfil(Perfil perfil) {
-		this.perfil = perfil;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+	public List<Solicitante> getSolicitantes() {
+		return solicitantes;
+	}
+	public void setSolicitantes(List<Solicitante> solicitantes) {
+		this.solicitantes = solicitantes;
+	}
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 }
