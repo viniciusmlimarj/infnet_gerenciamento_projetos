@@ -23,24 +23,32 @@ public class Projeto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
+	
 	private boolean iniciado;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate dataInicio;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate dataFim;
+	
 	private Integer quantidadeHoras;
+	
 	@ManyToOne
 	@JoinColumn(name = "idCliente")
 	private Cliente cliente;
+	
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Usuario gerente;
-	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
-	@JoinColumn(name = "idProjeto")
-	private List<Tarefa> tarefas;
+	
 	@ManyToMany(cascade = CascadeType.DETACH)
 	private List<Usuario> recursos;
+	
+	@OneToMany(mappedBy = "projeto", cascade = { CascadeType.REMOVE, CascadeType.MERGE}, orphanRemoval = true)
+	private List<Tarefa> tarefas;
 	
 	public Integer getId() {
 		return id;

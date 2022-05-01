@@ -53,12 +53,11 @@
 			        </c:if>
 			        <c:if test="${o.iniciado}">
 			        	<td>Projeto Iniciado</td>
+			        	<td><a href="/projeto/${o.id}/tarefa">Tarefas</a></td>
 			        	<c:if test="${usuarioLogado.perfil.administrador or usuarioLogado.perfil.gerente}">
-				        	<td><a href="/projeto/${o.id}/tarefa">Tarefas</a></td>
 			        		<td><a href="/projeto/${o.id}/recurso">Recursos</a></td>
 			        	</c:if>
 						<c:if test="${not usuarioLogado.perfil.administrador and not usuarioLogado.perfil.gerente}">
-				        	<td></td>
 				        	<td></td>
 			        	</c:if>
 			        </c:if>

@@ -21,6 +21,14 @@
 	  
 	  <form action="/projeto/salvar" method="post">
 	  	<input type="hidden" name="id" value="${projeto.id}">
+	  	
+	  	<c:if test="${not empty projeto.id}">
+	  		<input type="hidden" name="iniciado" value="${projeto.iniciado}">
+	  	</c:if>
+	  	<c:if test="${empty projeto.id}">
+	  		<input type="hidden" name="iniciado" value="false">
+	  	</c:if>
+	    
 	    <div class="mb-3 mt-3">
 	      <label>Nome:</label>
 	      <input type="text" class="form-control" placeholder="Nome" name="nome" value="${projeto.nome}">

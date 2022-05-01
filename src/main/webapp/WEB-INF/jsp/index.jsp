@@ -4,15 +4,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Pedidos</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<title>Projetos</title>
+  <c:import url="/WEB-INF/jsp/head.jsp"/>
 </head>
 <body>
 
 	<c:import url="/WEB-INF/jsp/menu.jsp"/>	  
 
 	<div class="container">
-		<h4>Bem vindo ao sistema de pedidos.</h4>
+		<h4>Sistema de Gestão de Projetos.</h4>
 	</div>
 </body>
 </html>

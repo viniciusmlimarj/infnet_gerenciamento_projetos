@@ -18,12 +18,15 @@ public class Tarefa {
 	private String titulo;
 	private String descricao;
 	private Integer status;
+	
 	@ManyToOne
-	@JoinColumn(name = "idProjeto")
+	@JoinColumn(name = "idProjeto", nullable = false)
 	private Projeto projeto;
+	
 	@ManyToOne
-	@JoinColumn(name = "idUsuario")
+	@JoinColumn(name = "idFuncionario", nullable = true)
 	private Usuario funcionario;
+	
 	public Integer getId() {
 		return id;
 	}

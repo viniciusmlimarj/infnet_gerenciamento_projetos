@@ -1,6 +1,7 @@
 package br.com.vinicius.infnet.trabalho.model.service.impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.vinicius.infnet.trabalho.model.domain.Projeto;
+import br.com.vinicius.infnet.trabalho.model.domain.Tarefa;
 import br.com.vinicius.infnet.trabalho.model.domain.Usuario;
 import br.com.vinicius.infnet.trabalho.model.repository.ProjetoRepository;
 import br.com.vinicius.infnet.trabalho.model.service.ProjetoService;
@@ -45,6 +47,12 @@ public class ProjetoServiceImpl implements ProjetoService {
 	
 	@Override
 	public void salvar(Projeto projeto) {
+		if (projeto.getTarefas() == null) {
+			projeto.setTarefas(new ArrayList<Tarefa>());
+		}
+		if (projeto.getRecursos() == null) {
+			projeto.setRecursos(new ArrayList<Usuario>());
+		}
 		projetoRepository.save(projeto);
 	}
 	

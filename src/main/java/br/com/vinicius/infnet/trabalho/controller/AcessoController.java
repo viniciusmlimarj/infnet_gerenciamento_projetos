@@ -3,7 +3,6 @@ package br.com.vinicius.infnet.trabalho.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,19 +43,14 @@ public class AcessoController {
 	
 	@PostMapping(value = "/login")
 	public String login(Model model, @RequestParam String email, @RequestParam String senha) {
-		
 		Usuario usuario = usuarioService.validar(email, senha);
-		
 		if(usuario != null) {
 			model.addAttribute("usuarioLogado", usuario);
-
 			return "index";
 		}
 		
-		String msg = "Usuário ou senha incorretos."; 		
+		model.addAttribute("mensagem", "Usuário ou senha incorretos.");
 		
-		model.addAttribute("mensagem", msg);
-
 		return "login";
 	}
 }

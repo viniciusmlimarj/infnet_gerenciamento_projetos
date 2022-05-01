@@ -29,14 +29,20 @@ public class ProjetoController {
 	
 	@Autowired
 	private TarefaService tarefaService;
+
+	private void listarInterno(Model model, Usuario usuario) {
+		if (usuario.getPerfil().isAdministrador()) {
+			model.addAttribute("lista", projetoService.listar());
+		} else if (usuario.getPerfil().isGerente()) {
+			model.addAttribute("lista", projetoService.listarProjetosPorGerente(usuario.getId()));
+		} else {
+			model.addAttribute("lista", projetoService.listarProjetosPorFuncionario(usuario.getId()));
+		}
+	}
 	
 	@GetMapping(value = "/projeto")
 	public String listar(Model model, @SessionAttribute("usuarioLogado") Usuario usuario) {
-		if (usuario.getPerfil().isAdministrador()) {
-			model.addAttribute("lista", projetoService.listar());
-		} else {
-			model.addAttribute("lista", projetoService.listarProjetosPorGerente(usuario.getId()));
-		}
+		listarInterno(model, usuario);
 		return "projeto/lista";
 	}
 	
@@ -82,7 +88,7 @@ public class ProjetoController {
 	@GetMapping(value = "/projeto/{id}/iniciar")
 	public String iniciar(Model model, @PathVariable Integer id, @SessionAttribute("usuarioLogado") Usuario usuario) {
 		projetoService.iniciar(id);
-		model.addAttribute("lista", projetoService.listarProjetosPorGerente(usuario.getId()));
+		listarInterno(model, usuario);
 		model.addAttribute("mensagem", "Projeto iniciado com sucesso.");
 		return "redirect:/projeto";
 	}
