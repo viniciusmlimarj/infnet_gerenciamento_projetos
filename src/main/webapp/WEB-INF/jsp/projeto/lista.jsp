@@ -33,8 +33,10 @@
 	        	<th></th>
 	        	<th></th>
 	        	<th></th>
-	        	<th></th>
-	        	<th></th>
+	        	<c:if test="${usuarioLogado.perfil.administrador or usuarioLogado.perfil.gerente}">
+		        	<th></th>
+		        	<th></th>
+		        </c:if>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -61,8 +63,10 @@
 				        	<td></td>
 			        	</c:if>
 			        </c:if>
-		        	<td><a href="/projeto/${o.id}">Alterar</a></td>
-		        	<td><a href="/projeto/${o.id}/excluir">Excluir</a></td>
+			        <c:if test="${usuarioLogado.perfil.administrador or usuarioLogado.perfil.gerente}">
+			        	<td><a href="/projeto/${o.id}">Alterar</a></td>
+			        	<td><a href="/projeto/${o.id}/excluir">Excluir</a></td>
+		        	</c:if>
 			      </tr>
 		      </c:forEach>
 		    </tbody>
